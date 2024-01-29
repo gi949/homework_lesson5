@@ -49,9 +49,6 @@ ansible-playbook --syntax-check main.yaml
 
 ansible-playbook main.yaml
 
-Для проверки в /etc/hosts своей ВМ прописываем: 
-external_ip_address Yandex Network Load Balancer www.example.com
-
 Для проверки можно из консоли своей ВМ подключится к IP ВМ hp1 и выполнить запросы на БД wordpress
 
 mysql -u wordpress wordpress -h <internal_ip_address_vm_... для ВМ hp1> -p <пароль по wordpress>
