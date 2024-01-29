@@ -1,0 +1,14 @@
+---
+
+- name: db install
+  hosts: db
+  become: true
+  roles:
+    - db_ins
+
+- name: hp install
+  hosts: hp
+  become: true
+  roles:
+    - hp_ins
+

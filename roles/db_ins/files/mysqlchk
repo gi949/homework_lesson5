@@ -1,0 +1,14 @@
+service mysqlchk
+{
+        disable = no
+        flags = REUSE
+        socket_type = stream
+        port = 9199
+        wait = no
+        user = nobody
+        server = /usr/bin/clustercheck
+        log_on_failure += USERID
+        only_from = 0.0.0.0/0
+        per_source = UNLIMITED
+}
+

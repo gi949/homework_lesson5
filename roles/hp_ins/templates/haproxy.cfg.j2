@@ -1,0 +1,53 @@
+##########################
+#         GLOBAL         #
+##########################
+global
+    daemon
+    user       haproxy
+    group      haproxy
+    maxconn    15000
+
+    log        127.0.0.1 local0
+
+##########################
+#        DEFAULT         #
+##########################
+defaults
+    log        global
+    maxconn     15000
+    retries     3
+    option      dontlognull
+    option      tcplog
+    option      redispatch
+    mode        http
+
+##########################
+#         STATS          #
+##########################
+listen stats
+    bind       0.0.0.0:9000
+    mode       http
+    maxconn    10
+    stats      enable
+    stats      admin if TRUE
+    stats      uri /haproxy_stats
+    stats      realm haproxy\ Statistics
+    stats      auth haproxy:Kn3pZt4SltrU
+    timeout    client 100s
+    timeout    server 100s
+    timeout    connect 100s
+    timeout    queue 100s
+
+##########################
+#        LISTENS         #
+##########################
+listen cluster_writes
+    balance         leastconn
+    bind            0.0.0.0:3306
+    mode            tcp
+    option          httpchk
+    server db1 {{ ip_db1 }}:3306 check port 9199 inter 60000 fastinter 10000 downinter 30000 rise 2 fall 2
+    server db2 {{ ip_db2 }}:3306 check port 9199 inter 60000 fastinter 10000 downinter 30000 rise 2 fall 2
+    server db3 {{ ip_db3 }}:3306 check port 9199 inter 60000 fastinter 10000 downinter 30000 rise 2 fall 2
+
+
