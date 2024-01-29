@@ -37,6 +37,7 @@ ping ansible all -m ping
 а также название базы, пользователя и пароль, а также домен для настройки wordpress.
 
 Роль db_ins выполняет установку и развертывание Percona XtraDB Cluster
+и сервиса xinetd для реализации проверок состояния кластера
 
 Роль hp_ins выполняет настройку балансировщика haproxy 
 
@@ -55,4 +56,3 @@ external_ip_address Yandex Network Load Balancer www.example.com
 
 mysql -u wordpress wordpress -h <internal_ip_address_vm_... для ВМ hp1> -p <пароль по wordpress>
 
-	
